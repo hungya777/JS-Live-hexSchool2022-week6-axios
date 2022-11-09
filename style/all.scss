@@ -1,0 +1,11 @@
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap');
+
+@import './helper/variables';
+@import './base/reset';
+@import './base/base';
+
+@import './mixins/mixin';
+@import './helper/utilities';
+
+@import './pages/index';

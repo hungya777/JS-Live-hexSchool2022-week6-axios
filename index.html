@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2022 JS直播班-week6-axios</title>
+  <!-- google font icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+  rel="stylesheet" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/all.css">
+</head>
+<body>
+  <main>
+    <section class="container pt-30 pb-25 pt-sm-10 pb-sm-10">
+      <div class="addTicket-panel d-flex justify-content-between flex-sm-column px-24 py-15 px-sm-8 py-sm-8">
+        <div class="addTicket-img">
+          <img class="mb-5" src="./images/main_img.png" alt="photo-main">
+          <img class="d-sm-none" src="./images/logo.png" alt="logo">
+        </div>
+        <form action="" class="form-add ml-7_5 ml-sm-0">
+          <h1 class="title fs-l fw-bold mb-8"><span class="material-icons-outlined mr-1">
+            add_circle_outline
+            </span>新增旅遊套票</h1>
+          <div class="ticket-input d-flex justify-content-between mb-4">
+            <label class="fw-medium mr-8" for="ticketName">套票名稱</label>
+            <input type="text" name="套票名稱" id="ticketName" placeholder="請填寫套票名稱" required="required">
+          </div>
+          <div class="ticket-input d-flex justify-content-between mb-4">
+            <label class="fw-medium mr-8" for="ticketImgUrl">圖片網址</label>
+            <input type="text" name="圖片網址" id="ticketImgUrl" placeholder="請填寫圖片網址" required="required">
+          </div>
+          <div class="ticket-input d-flex justify-content-between mb-4">
+            <label class="fw-medium mr-8" for="ticketLocation">景點地點</label>
+            <select name="景點地點" id="ticketLocation" required="required">
+              <option value="" disabled selected hidden>請選擇景點地區</option>
+              <option value="台北">台北</option>
+              <option value="台中">台中</option>
+              <option value="高雄">高雄</option>
+            </select>
+          </div>
+          <div class="ticket-input d-flex justify-content-between mb-4">
+            <label class="fw-medium mr-8" for="ticketPrice">套票金額</label>
+            <input type="number" name="套票金額" id="ticketPrice" placeholder="請填寫套票金額" name="套票金額" min="0" required="required">
+          </div>
+          <div class="ticket-input d-flex justify-content-between mb-4">
+            <label class="fw-medium mr-8" for="ticketNum">套票組數</label>
+            <input type="number" name="套票組數" id="ticketNum" placeholder="請填寫套票組數" name="套票組數" min="1" required="required">
+          </div>
+          <div class="ticket-input d-flex justify-content-between mb-4">
+            <label class="fw-medium mr-8" for="ticketRate">套票星級</label>
+            <input type="number" name="套票星級" id="ticketRate" placeholder="請填寫套票星級" name="套票星級" min="1" max="10" required="required">
+          </div>
+          <div class="ticket-input d-flex justify-content-between d-flex align-items-center mb-6">
+            <label class="fw-medium mr-8" for="ticketDescription">套票描述</label>
+            <textarea name="套票描述" id="ticketDescription" placeholder="請填寫套票描述 (限 100 字)" required="required"></textarea>
+          </div>
+          <div class="text-end">
+            <input type="button" id="btnAddTicket" class="btn btn-add fs-m px-10 py-2_5" value="新增套票">
+          </div>
+        </form>
+      </div>
+    </section>
+    <section class="bg-gray">
+      <div class="container pt-14 pb-30 pt-sm-10 pb-sm-10">
+        <div class="mb-13 d-sm-flex flex-sm-column justify-content-sm-between align-items-sm-center">
+          <select name="地區搜尋" id="locationSearch" class="location-search ml-24 ml-sm-0">
+            <option value="" disabled selected hidden>地區搜尋</option>
+            <option value="全部地區">全部地區</option>
+            <option value="台北">台北</option>
+            <option value="台中">台中</option>
+            <option value="高雄">高雄</option>
+          </select>
+          <label id="countsSearchResult" class="text-gray-dark ml-7_5" for="locationSearch">本次搜尋共6筆資料</label>
+        </div>
+        <div>
+          <ul id="ticketCardArea" class="d-flex flex-wrap gx-percent-2 gy-9">
+            <!-- <li class="ticket-card">
+              <div class="ticket-card-img mb-5">
+                <a href="#">
+                  <img src="./images/travel_1.png" alt="photo-travel">                
+                </a>
+                <div class="ticket-card-location fs-m px-5 py-2">高雄</div>
+                <div class="ticket-card-rank px-2 py-1">8.6</div>
+              </div>
+              <div class="ticket-card-content d-flex flex-column justify-content-between px-5">
+                <div>
+                  <h2 class="fs-l fw-medium text-primary mb-4">熊森公園親子二日遊套票</h2>
+                  <p class="mb-8 text-gray-dark">
+                    來自日本最受歡迎的兒童遊樂園《 BearSon Park 熊森公園》於全世界有800多家據點，在全世界、日本及台灣，很多小孩的童年都在遊戲愛樂園裡一同成長，提供兒童一個最富教育性及娛樂性的休憩遊樂天地！
+                  </p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center text-primary mb-4">
+                  <p class="fw-medium">
+                    <span class="material-icons-outlined mr-1">
+                      error
+                    </span>
+                    剩下最後 3 組
+                  </p>
+                  <div class="d-flex align-items-center">
+                    <span class="fw-medium mr-1">TWD</span>
+                    <span class="fs-xl fw-medium">$2,480</span>
+                  </div>
+                </div>
+              </div>
+            </li> -->
+          </ul>
+          <div class="cantFind-area">
+            <h3 class="fs-xl">查無此關鍵字資料</h3>
+            <img src="./images/no_found.png" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+  <script type="module" src="./js/all.js"></script>
+</body>
+</html>
