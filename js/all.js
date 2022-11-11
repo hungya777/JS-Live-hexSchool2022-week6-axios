@@ -4,7 +4,8 @@ let tempId = 0;
 //套票卡片區塊
 const ticketCardArea = document.querySelector('#ticketCardArea');
 
-// 新增旅遊套票功能
+// 新增旅遊套票功能-表單欄位
+const addForm = document.querySelector("#addForm");
 const ticketName = document.querySelector("#ticketName");
 const ticketImgUrl = document.querySelector("#ticketImgUrl");
 const ticketLocation = document.querySelector("#ticketLocation");
@@ -52,7 +53,7 @@ function renderData(data){
     cantFindArea.style.display = "block";  //查無資料區塊-顯示
   }else{
     cantFindArea.style.display = "none";   //查無資料區塊-隱藏
-    data.forEach((item, index) => {
+    data.forEach((item) => {
       //設定 tempId 做為新增資料使用
       if(item.id > tempId){
         tempId = item.id;
@@ -121,6 +122,7 @@ btnAddTicket.addEventListener('click',(e) =>{
     obj.isTimeLimit = false;
     data.push(obj);
     renderData(data);
+    addForm.reset(); //清空表單欄位 (助教建議優化功能)
   }
 })
 
@@ -131,7 +133,7 @@ locationSearch.addEventListener('change', (e)=>{
   if(e.target.value == "全部地區") {
     renderData(data);
   } else {
-    let filterData = data.filter((item, index) =>{
+    let filterData = data.filter((item) =>{
       return item.area == e.target.value;
     })
     renderData(filterData);
@@ -139,9 +141,9 @@ locationSearch.addEventListener('change', (e)=>{
 })
 
 //檢查、驗證新增套票的input欄位是否符合要求
-function chkFormValue(arrInputs, chkMsg){
+function chkFormValue(arrInputs){
   let str = "";
-  arrInputs.forEach((item, index)=>{
+  arrInputs.forEach((item)=>{
     if(item.value == "") {
       str += `欄位【${item.name}】不可空白，請填寫。\n`;
     } else {
